@@ -2,7 +2,7 @@ import nonebot
 from nonebot.log import logger
 from nonebot.adapters.qq import Adapter as QQAdapter
 
-nonebot.init()
+nonebot.init(driver="~fastapi+~httpx")
 driver = nonebot.get_driver()
 
 logger.info(f"Driver type: {type(driver)}")
