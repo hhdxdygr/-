@@ -1,6 +1,7 @@
 import nonebot
 from nonebot.log import logger
 from nonebot.adapters.qq import Adapter as QQAdapter
+import os
 
 nonebot.init()
 driver = nonebot.get_driver()
