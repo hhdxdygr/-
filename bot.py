@@ -1,4 +1,5 @@
 import nonebot
+from nonebot.log import logger
 from nonebot.adapters.qq import Adapter as QQAdapter
 
 nonebot.init()
@@ -8,9 +9,10 @@ nonebot.load_plugins("plugins")
 
 app = nonebot.get_asgi()
 
-# 调试：打印所有注册的路由
+logger.info("=== 应用启动，开始打印路由 ===")
 for route in app.routes:
-    print(f"Route: {route.path}")
+    logger.info(f"Route: {route.path}")
+logger.info("=== 路由打印完毕 ===")
 
 if __name__ == "__main__":
     nonebot.run(app="bot:app")
