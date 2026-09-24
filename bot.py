@@ -1,24 +1,18 @@
 import nonebot
 from nonebot.log import logger
 from nonebot.adapters.qq import Adapter as QQAdapter
-import os
 
 nonebot.init()
 driver = nonebot.get_driver()
+
+logger.info(f"Driver type: {type(driver)}")
+logger.info(f"Has HTTPClientMixin: {hasattr(driver, 'request') or hasattr(driver, '_request')}")
+logger.info(f"Has ASGIMixin: {hasattr(driver, 'setup')}")
+
 driver.register_adapter(QQAdapter)
 nonebot.load_plugins("plugins")
 
 app = nonebot.get_asgi()
-
-
-@driver.on_startup
-async def debug_routes():
-    raw = os.getenv("QQ_BOTS", "")
-    logger.info(f"QQ_BOTS 原始值: {raw!r}")
-    logger.info("=== 应用已启动，开始打印路由 ===")
-    for route in app.routes:
-        logger.info(f"Route: {getattr(route, 'path', route)}")
-    logger.info("=== 路由打印完毕 ===")
 
 if __name__ == "__main__":
     nonebot.run(app="bot:app")
